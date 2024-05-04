@@ -38,7 +38,7 @@
         </div>
         <div>
           <label for="budget">Budget:</label>
-          <input type="text" id="budget" name="budget" inputmode="decimal" pattern="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" placeholder="$0.00" required>
+          <input type="text" id="budget" name="budget" inputmode="numeric" pattern="[0-9]*" placeholder="$0" required>
         </div>
         <button type="submit">Submit</button>
       </form>

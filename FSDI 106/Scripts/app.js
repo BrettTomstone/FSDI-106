@@ -10,22 +10,22 @@ function formatBudget(value) {
   const formatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
   });
   return formatter.format(value);
 }
 
 // Update the budget input value on change
 budgetInput.addEventListener('input', function() {
-  const inputValue = budgetInput.value.replace(/[^0-9.]/g, '');
-  const numericValue = parseFloat(inputValue);
+  const inputValue = budgetInput.value.replace(/[^0-9]/g, '');
+  const numericValue = parseInt(inputValue);
 
   if (!isNaN(numericValue)) {
-    if (numericValue <= 1000000) {
+    if (numericValue >= 1 && numericValue <= 1000000) {
       budgetInput.value = formatBudget(numericValue);
     } else {
-      budgetInput.value = formatBudget(1000000);
+      budgetInput.value = '';
     }
   } else {
     budgetInput.value = '';
