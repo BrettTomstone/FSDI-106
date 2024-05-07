@@ -1,76 +1,39 @@
 
-// Get the form element
-const form = document.querySelector('#form form');
+// Get the form and project list elements
+const form = document.querySelector('form');
 
-// Get the budget input element
-const budgetInput = document.getElementById('budget');
+// Array to store the submitted projects
+let projects = [];
 
-// Format the budget input value
-function formatBudget(value) {
-  const formatter = new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  });
-  return formatter.format(value);
-}
-
-// Update the budget input value on change
-budgetInput.addEventListener('input', function() {
-  const inputValue = budgetInput.value.replace(/[^0-9]/g, '');
-  const numericValue = parseInt(inputValue);
-
-  if (!isNaN(numericValue)) {
-    if (numericValue >= 1 && numericValue <= 1000000) {
-      budgetInput.value = formatBudget(numericValue);
-    } else {
-      budgetInput.value = '';
-    }
-  } else {
-    budgetInput.value = '';
-  }
-});
-
-// Handle form submission
-form.addEventListener('submit', function(e) {
-  e.preventDefault(); // Prevent the default form submission
+// Event listener for form submission
+form.addEventListener('submit', (event) => {
+  event.preventDefault();
 
   // Get the form values
-  const title = form.elements['title'].value;
-  const description = form.elements['description'].value;
-  const color = form.elements['color'].value;
-  const startDate = form.elements['startDate'].value;
-  const status = form.elements['status'].value;
-  const budget = budgetInput.value;
+  const title = document.getElementById('title').value;
+  const description = document.getElementById('description').value;
+  const startDate = document.getElementById('startDate').value;
+  const status = document.getElementById('status').value;
+  const budget = document.getElementById('budget').value;
 
-  // Perform form validation
-  if (
-    title.trim() === '' ||
-    description.trim() === '' ||
-    color.trim() === '' ||
-    startDate.trim() === '' ||
-    status.trim() === '' ||
-    budget.trim() === ''
-  ) {
-    alert('Please fill in all fields.');
-    return;
-  }
-
-  // Create a new task object
-  const newTask = {
-    title: title,
-    description: description,
-    color: color,
-    startDate: startDate,
-    status: status,
-    budget: budget
+  // Create a project object
+  const project = {
+    title,
+    description,
+    startDate,
+    status,
+    budget
   };
 
-  // TODO: Perform necessary actions with the newTask object (e.g., send to server, add to list, etc.)
-  console.log('New Task:', newTask);
+  // Add the project to the array
+  projects.push(project);
 
-  // Reset the form
+  // Store the updated projects array in local storage
+  localStorage.setItem('projects', JSON.stringify(projects));
+
+  // Clear the form
   form.reset();
-  budgetInput.value = '';
+
+  // Redirect to the "My Projects" page
+  window.location.href = 'projects.html';
 });
