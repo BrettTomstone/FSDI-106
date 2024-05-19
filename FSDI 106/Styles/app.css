@@ -1,5 +1,3 @@
-/* ... previous CSS styles ... */
-
 header {
   background-color: #333;
   padding: 10px;
@@ -51,7 +49,8 @@ input[type="text"],
 input[type="date"],
 input[type="number"],
 textarea,
-select {
+select,
+input[type="color"] {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -87,9 +86,12 @@ button[type="submit"]:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.tropical-background {
-  background-image: url('path/to/your/tropical-beach-image.jpg');
+.beach-background {
+  background-image: url('path/to/your/professional-beach-background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+input[type="color"].colorselector{
+  width: 150px;
 }
